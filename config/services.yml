@@ -1,0 +1,12 @@
+services:
+    tacitus89.homepage.index:
+        class: tacitus89\homepage\controller\index
+        arguments:
+            - @config
+            - @config_text
+            - @controller.helper
+            - @template
+            - @user
+            - @cache.driver
+            - %core.root_path%
+            - %core.php_ext%

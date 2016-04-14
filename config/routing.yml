@@ -1,0 +1,3 @@
+tacitus89_homepage_index:
+    pattern: /{category}
+    defaults: { _controller: tacitus89.homepage.index:display, category: null}
