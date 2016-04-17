@@ -61,6 +61,7 @@ class listener implements EventSubscriberInterface
         $forum_data = $event['forum_data'];
         $template_data['S_HP_SHOW'] = ($forum_data['hp_show'])? true : false;
         $template_data['HP_NAME'] = $forum_data['hp_name'];
+        $template_data['HP_POST'] = $forum_data['hp_post'];
         $template_data['HP_DESC'] = $forum_data['hp_desc'];
         $template_data['HP_META'] = $forum_data['hp_meta'];
         $event['template_data'] = $template_data;
@@ -78,6 +79,7 @@ class listener implements EventSubscriberInterface
         $forum_data = $event['forum_data'];
         $forum_data['hp_show'] = $this->request->variable('homepage_show', 0);
         $forum_data['hp_name'] = $this->request->variable('hp_name', '');
+        $forum_data['hp_post'] = $this->request->variable('hp_post', '');
         $forum_data['hp_desc'] = $this->request->variable('hp_desc', '');
         $forum_data['hp_meta'] = $this->request->variable('hp_meta', '');
         $event['forum_data'] = $forum_data;
