@@ -59,7 +59,7 @@ class categories
             $category = $this->container->get('tacitus89.homepage.category')->import($row);
             if($row['parent_id'] > 0)
             {
-                $entities[$row['parent_id']]->add_sub_category($category);
+                $entities[$row['parent_id']]->add_forum($category);
             }
             else
             {

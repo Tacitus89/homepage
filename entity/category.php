@@ -23,12 +23,12 @@ class category
     protected $data;
 
     /**
-     * Data for sub entity
+     * Data for forums as category entity
      *
      * @var \tacitus89\homepage\entity\category[]
      * @access protected
      */
-    protected $categories = array();
+    protected $forums = array();
 
     /** @var \phpbb\db\driver\driver_interface */
     protected $db;
@@ -191,9 +191,9 @@ class category
      * @param category $category
      * @access public
      */
-    public function add_sub_category(\tacitus89\homepage\entity\category $category)
+    public function add_forum(\tacitus89\homepage\entity\category $category)
     {
-        $this->categories[] = $category;
+        $this->forums[] = $category;
     }
 
     /**
@@ -202,8 +202,8 @@ class category
      * @return category[]
      * @access public
      */
-    public function get_sub_categories()
+    public function get_forums()
     {
-        return $this->categories;
+        return $this->forums;
     }
 }

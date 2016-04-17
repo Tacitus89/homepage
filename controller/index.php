@@ -96,12 +96,12 @@ class index
                 'NAME'	    => $category->get_name(),
             ));
 
-            foreach ($category->get_sub_categories() as $sub_category)
+            foreach ($category->get_forums() as $forum)
             {
                 $this->template->assign_block_vars('categories.forums', array(
-                    'NAME'	=> $sub_category->get_name(),
-                    'DESC'  => $sub_category->get_hp_desc(),
-                    'URL'   => $this->helper->route('tacitus89_homepage_index', array('category' => $sub_category->get_hp_name()))
+                    'NAME'	=> $forum->get_name(),
+                    'DESC'  => $forum->get_hp_desc(),
+                    'URL'   => $this->helper->route('tacitus89_homepage_index', array('category' => $forum->get_hp_name()))
                 ));
             }
         }
