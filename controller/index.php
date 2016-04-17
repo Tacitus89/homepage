@@ -9,17 +9,15 @@
 
 namespace tacitus89\homepage\controller;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
 * Index controller
 */
 class index
 {
-    /** @var \phpbb\config\config */
-	protected $config;
-
-	/** @var \phpbb\config\db_text */
-	protected $config_text;
+	/** @var ContainerInterface */
+	protected $container;
 
 	/** @var \phpbb\controller\helper */
 	protected $helper;
@@ -42,8 +40,7 @@ class index
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config                  	$config          Config object
-	* @param \phpbb\config\db_text                 	$config_text     DB text object
+	* @param ContainerInterface          			$container    Service container interface
 	* @param \phpbb\template\template              	$template        Template object
 	* @param \phpbb\user                           	$user            User object
     * @param \phpbb\cache\driver\driver_interface	$cache           Cache object
@@ -52,21 +49,19 @@ class index
 	* @return \tacitus89\homepage\controller\index
 	* @access public
 	*/
-	public function __construct(\phpbb\config\config $config,
-                                \phpbb\config\db_text $config_text,
+	public function __construct(ContainerInterface $container,
                                 \phpbb\controller\helper $helper,
                                 \phpbb\template\template $template,
                                 \phpbb\user $user,
                                 \phpbb\cache\driver\driver_interface $cache,
-                                $root_path,
+								$root_path,
                                 $php_ext)
 	{
-		$this->config = $config;
-		$this->config_text = $config_text;
+		$this->container = $container;
 		$this->helper = $helper;
 		$this->template = $template;
 		$this->user = $user;
-        $this->cache = $cache;
+		$this->cache = $cache;
         $this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 	}
@@ -80,8 +75,10 @@ class index
 	 */
 	public function display($category = '')
 	{
-       echo $category;
-	   
-	   return $this->helper->render('hp_body.html', $this->user->lang('HOMEPAGE'));
+		echo $category;
+		$page = $this->container->get('tacitus89.homepage.page')->load($category);
+
+		
+		return $this->helper->render('hp_body.html', $this->user->lang('HOMEPAGE'));
 	}
 }

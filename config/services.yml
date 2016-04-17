@@ -2,11 +2,16 @@ services:
     tacitus89.homepage.index:
         class: tacitus89\homepage\controller\index
         arguments:
-            - @config
-            - @config_text
+            - @service_container
             - @controller.helper
             - @template
             - @user
             - @cache.driver
             - %core.root_path%
             - %core.php_ext%
+
+    tacitus89.homepage.page:
+        class: tacitus89\homepage\entity\page
+        scope: prototype # scope MUST be prototype for this to work!
+        arguments:
+            - @dbal.conn
