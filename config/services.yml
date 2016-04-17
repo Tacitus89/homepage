@@ -15,3 +15,15 @@ services:
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
             - @dbal.conn
+
+    tacitus89.homepage.category:
+            class: tacitus89\homepage\entity\category
+            scope: prototype # scope MUST be prototype for this to work!
+            arguments:
+                - @dbal.conn
+
+    tacitus89.homepage.categories:
+            class: tacitus89\homepage\operators\categories
+            arguments:
+                - @service_container
+                - @dbal.conn
