@@ -76,8 +76,13 @@ class index
 	public function display($category = '')
 	{
 		$this->showCategories();
-		echo $category;
+
 		$page = $this->container->get('tacitus89.homepage.page')->load($category);
+
+        $this->template->assign_vars(array(
+            'HP_TITLE'	    => $page->get_title(),
+            'HP_CONTENT'	=> $page->get_message(),
+        ));
 
 		
 		return $this->helper->render('hp_body.html', $this->user->lang('HOMEPAGE'));
