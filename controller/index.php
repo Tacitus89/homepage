@@ -16,6 +16,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 */
 class index
 {
+    /** @var \phpbb\config\config */
+    protected $config;
+
 	/** @var ContainerInterface */
 	protected $container;
 
@@ -40,7 +43,8 @@ class index
 	/**
 	* Constructor
 	*
-	* @param ContainerInterface          			$container    Service container interface
+    * @param \phpbb\config\config                   $config          Config object
+	* @param ContainerInterface          			$container       Service container interface
 	* @param \phpbb\template\template              	$template        Template object
 	* @param \phpbb\user                           	$user            User object
     * @param \phpbb\cache\driver\driver_interface	$cache           Cache object
@@ -49,7 +53,8 @@ class index
 	* @return \tacitus89\homepage\controller\index
 	* @access public
 	*/
-	public function __construct(ContainerInterface $container,
+	public function __construct(\phpbb\config\config $config,
+                                ContainerInterface $container,
                                 \phpbb\controller\helper $helper,
                                 \phpbb\template\template $template,
                                 \phpbb\user $user,
@@ -57,6 +62,7 @@ class index
 								$root_path,
                                 $php_ext)
 	{
+        $this->config = $config;
 		$this->container = $container;
 		$this->helper = $helper;
 		$this->template = $template;
@@ -106,9 +112,17 @@ class index
                 $this->template->assign_block_vars('categories.forums', array(
                     'NAME'	=> $forum->get_name(),
                     'DESC'  => $forum->get_hp_desc(),
-                    'URL'   => $this->helper->route('tacitus89_homepage_index', array('category' => $forum->get_hp_name()))
+                    'URL'   => $this->getDomain() . $forum->get_hp_name(),
                 ));
             }
         }
 	}
+
+    /**
+     * Get domain
+     */
+    private function getDomain()
+    {
+        return $this->config['server_protocol'] . $this->config['server_name'] . '/';
+    }
 }
