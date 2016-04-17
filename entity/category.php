@@ -22,6 +22,14 @@ class category
      */
     protected $data;
 
+    /**
+     * Data for sub entity
+     *
+     * @var \tacitus89\homepage\entity\category[]
+     * @access protected
+     */
+    protected $categories = array();
+
     /** @var \phpbb\db\driver\driver_interface */
     protected $db;
 
@@ -175,5 +183,27 @@ class category
     public function get_hp_desc()
     {
         return (isset($this->data['hp_desc'])) ? (string) $this->data['hp_desc'] : '';
+    }
+
+    /**
+     * Adding an sub category in this category
+     *
+     * @param category $category
+     * @access public
+     */
+    public function add_sub_category(\tacitus89\homepage\entity\category $category)
+    {
+        $this->categories[] = $category;
+    }
+
+    /**
+     * Get all sub categories of this category
+     *
+     * @return category[]
+     * @access public
+     */
+    public function get_sub_categories()
+    {
+        return $this->categories;
     }
 }

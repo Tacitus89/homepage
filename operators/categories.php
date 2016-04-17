@@ -44,19 +44,28 @@ class categories
      */
     public function get_categories()
     {
+        /** @var \tacitus89\homepage\entity\category[] $entities */
         $entities = array();
 
         // Load all page data from the database
-        $sql = 'SELECT forum_id, forum_name, hp_name, hp_desc
+        $sql = 'SELECT forum_id, parent_id, forum_name, hp_name, hp_desc
 			FROM ' . FORUMS_TABLE . '
-			WHERE parent_id = 0 AND hp_show = 1
+			WHERE hp_show = 1
 			ORDER BY left_id ASC';
         $result = $this->db->sql_query($sql);
 
         while ($row = $this->db->sql_fetchrow($result))
         {
-            // Import each page row into an entity
-            $entities[] = $this->container->get('tacitus89.homepage.category')->import($row);
+            $category = $this->container->get('tacitus89.homepage.category')->import($row);
+            if($row['parent_id'] > 0)
+            {
+                $entities[$row['parent_id']]->add_sub_category($category);
+            }
+            else
+            {
+                // Import each page row into an entity
+                $entities[$row['forum_id']] = $category;
+            }
         }
         $this->db->sql_freeresult($result);
 

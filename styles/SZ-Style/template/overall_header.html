@@ -140,6 +140,21 @@
 				</div>
 				<!-- ENDIF -->
 				<ul id="phpbb-menu" class="phpbb-menu">
+                    <!-- BEGIN categories -->
+                        <li class="nav-button but-customise"><a href="#">{categories.NAME}</a>
+                        <!-- IF categories.forums -->
+                            <div class="sub-menu" style="display: none;">
+                            <!-- BEGIN categories.forums -->
+                                <ul>
+                                    <li><h4><a href="{categories.forums.URL}">{categories.forums.NAME}</a></h4>
+                                        <p><a href="{categories.forums.URL}">{categories.forums.DESC}</a></p>
+                                    </li>
+                                </ul>
+                            <!-- END categories.forums -->
+                            </div>
+                        <!-- ENDIF -->
+                        </li>
+                    <!-- END categories -->
 					<li class="nav-button but-customise"><a href="#">Funktionen</a>
 						<div class="sub-menu" style="display: none;">
 							<ul>
