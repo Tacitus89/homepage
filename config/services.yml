@@ -1,4 +1,11 @@
 services:
+    tacitus89.homepage.listener:
+        class: tacitus89\homepage\event\listener
+        arguments:
+            - @request
+        tags:
+            - { name: event.listener }
+
     tacitus89.homepage.index:
         class: tacitus89\homepage\controller\index
         arguments:

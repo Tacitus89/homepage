@@ -1,0 +1,27 @@
+<div id="homepage_options">
+    <fieldset>
+        <legend>{L_HOMEPAGE}</legend>
+        <dl>
+            <dt><label for="homepage_show">{L_HP_SHOW}{L_COLON}</label><br><span>{L_HP_SHOW_EXPLAIN}</span></dt>
+            <dd><label><input type="radio" class="radio" name="homepage_show" value="1"<!-- IF S_HP_SHOW --> id="homepage_show" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+                <label><input type="radio" class="radio" name="homepage_show" value="0"<!-- IF not S_HP_SHOW --> id="homepage_show" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+
+        </dl>
+        <dl>
+            <dt><label for="hp_name">{L_HP_NAME}{L_COLON}</label><br><span>{L_HP_NAME_EXPLAIN}</span></dt>
+            <dd><input class="text medium" id="hp_name" name="hp_name" value="{HP_NAME}" maxlength="255" type="text"></dd>
+        </dl>
+        <dl>
+            <dt><label for="hp_post">{L_HP_POST}{L_COLON}</label><br><span>{L_HP_POST_EXPLAIN}</span></dt>
+            <dd><input class="text medium" id="hp_post" name="hp_post" value="{HP_POST}" maxlength="255" type="text"></dd>
+        </dl>
+        <dl>
+            <dt><label for="hp_desc">{L_HP_DESC}{L_COLON}</label><br><span>{L_HP_DESC_EXPLAIN}</span></dt>
+            <dd><input class="text medium" id="hp_desc" name="hp_desc" value="{HP_DESC}" maxlength="255" type="text"></dd>
+        </dl>
+        <dl>
+            <dt><label for="hp_meta">{L_HP_META}{L_COLON}</label><br><span>{L_HP_META_EXPLAIN}</span></dt>
+            <dd><input class="text medium" id="hp_meta" name="hp_meta" value="{HP_META}" maxlength="255" type="text"></dd>
+        </dl>
+    </fieldset>
+</div>
