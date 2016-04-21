@@ -107,7 +107,8 @@ class index
         {
             $this->template->assign_block_vars('forums', array(
                 'NAME'	    => $forum->get_name(),
-                'URL'		=> $this->getDomain() . $forum->get_hp_name(),
+                'URL'		=> $this->getDomain() . $category . '/' . $forum->get_hp_name(),
+                'IMAGE'     => $this->root_path . $forum->get_forum_image(),
             ));
         }
 
