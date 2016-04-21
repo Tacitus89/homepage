@@ -51,13 +51,13 @@ class categories
         $entities = array();
 
         if($category == ''){
-            $sql = 'SELECT forum_id, parent_id, forum_name, forum_image, hp_name, hp_desc
+            $sql = 'SELECT forum_id, parent_id, forum_name, forum_desc, forum_image, hp_name, hp_desc
 			FROM ' . FORUMS_TABLE . '
 			WHERE hp_show = 1
 			ORDER BY left_id ASC';
         }
         else {
-            $sql = 'SELECT f1.forum_id, f1.parent_id, f1.forum_name, f1.forum_image, f1.hp_name, f1.hp_desc
+            $sql = 'SELECT f1.forum_id, f1.parent_id, f1.forum_name, f1.forum_desc, f1.forum_image, f1.hp_name, f1.hp_desc
 			FROM ' . FORUMS_TABLE . ' f1
 			RIGHT JOIN '. FORUMS_TABLE .' f2 ON (f2.left_id < f1.left_id AND f2.right_id > f1.right_id)
 			WHERE f1.hp_show = 1 AND f2.hp_show = 1

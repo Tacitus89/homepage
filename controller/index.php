@@ -133,7 +133,7 @@ class index
             {
                 $this->template->assign_block_vars('categories.forums', array(
                     'NAME'	=> $forum->get_name(),
-                    'DESC'  => $forum->get_hp_desc(),
+                    'DESC'  => $forum->get_forum_desc(),
                     'URL'   => $this->getDomain() . $category->get_hp_name() . '/' . $forum->get_hp_name(),
                 ));
             }

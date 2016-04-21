@@ -56,7 +56,7 @@ class category
      */
     public function load($id)
     {
-        $sql = 'SELECT forum_id, forum_name, forum_image, hp_name, hp_desc
+        $sql = 'SELECT forum_id, forum_name, forum_desc, forum_image, hp_name, hp_desc
 			FROM ' . FORUMS_TABLE . '
 			WHERE id = ' . (int) $id .'
 			    AND parent_id = 0 AND hp_show = 1';
@@ -95,6 +95,7 @@ class category
             // column						=> data type (see settype())
             'forum_id'						=> 'integer',
             'forum_name'					=> 'string',
+            'forum_desc'                    => 'string',
             'forum_image'                   => 'string',
             'hp_name'                       => 'string',
             'hp_desc'                       => 'string',
@@ -165,11 +166,21 @@ class category
         return (isset($this->data['forum_name'])) ? (string) $this->data['forum_name'] : '';
     }
 
-
+    /**
+     * Get forum description
+     *
+     * @return string Forum description
+     * @access public
+     */
+    public function  get_forum_desc()
+    {
+        return (isset($this->data['forum_desc'])) ? (string) $this->data['forum_desc'] : '';
+    }
+    
     /**
      * Get forum image
      *
-     * @return string
+     * @return string Forum image
      * @access public
      */
     public function get_forum_image()
