@@ -85,6 +85,7 @@ class index
 
 		$page = $this->container->get('tacitus89.homepage.page')->load($category);
 
+
         $this->template->assign_vars(array(
             'HP_TITLE'	    => $page->get_title(),
             'HP_CONTENT'	=> $page->get_message(),
@@ -105,6 +106,7 @@ class index
         {
             $this->template->assign_block_vars('categories', array(
                 'NAME'	    => $category->get_name(),
+				'URL'		=> $category->get_hp_name(),
             ));
 
             foreach ($category->get_forums() as $forum)
