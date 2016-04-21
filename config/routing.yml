@@ -1,3 +1,9 @@
 tacitus89_homepage_index:
+    pattern: /
+    defaults: { _controller: tacitus89.homepage.index:display}
+tacitus89_homepage_category:
     pattern: /{category}
-    defaults: { _controller: tacitus89.homepage.index:display, category: null}
+    defaults: { _controller: tacitus89.homepage.index:displayCategory, category: null}
+tacitus89_homepage_forum:
+    pattern: /{category}/{forum}
+    defaults: { _controller: tacitus89.homepage.index:displayForum, forum: null}

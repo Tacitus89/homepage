@@ -70,6 +70,8 @@ class index
 		$this->cache = $cache;
         $this->root_path = $root_path;
 		$this->php_ext = $php_ext;
+
+        $this->showMenu();
 	}
 
 	/**
@@ -79,26 +81,33 @@ class index
 	 * @return null
 	 * @access public
 	 */
-	public function display($category = '')
+	public function display()
 	{
-		$this->showCategories();
 
-		$page = $this->container->get('tacitus89.homepage.page')->load($category);
+	}
 
+    public function displayForum($forum)
+    {
+        $page = $this->container->get('tacitus89.homepage.page')->load($forum);
 
         $this->template->assign_vars(array(
             'HP_TITLE'	    => $page->get_title(),
             'HP_CONTENT'	=> $page->get_message(),
         ));
 
-		
-		return $this->helper->render('hp_body.html', $this->user->lang('HOMEPAGE'));
-	}
+
+        return $this->helper->render('hp_body.html', $this->user->lang('HOMEPAGE'));
+    }
+
+    public function displayCategory($category)
+    {
+        return $this->helper->render('hp_body.html', $this->user->lang('HOMEPAGE'));
+    }
 
 	/**
 	 * Display all rightful categories on Homepage
 	 */
-	private function showCategories()
+	private function showMenu()
 	{
         $categories = $this->container->get('tacitus89.homepage.categories')->get_categories();
 
@@ -106,7 +115,7 @@ class index
         {
             $this->template->assign_block_vars('categories', array(
                 'NAME'	    => $category->get_name(),
-				'URL'		=> $category->get_hp_name(),
+				'URL'		=> $this->getDomain() . $category->get_hp_name(),
             ));
 
             foreach ($category->get_forums() as $forum)
@@ -114,7 +123,7 @@ class index
                 $this->template->assign_block_vars('categories.forums', array(
                     'NAME'	=> $forum->get_name(),
                     'DESC'  => $forum->get_hp_desc(),
-                    'URL'   => $this->getDomain() . $forum->get_hp_name(),
+                    'URL'   => $this->getDomain() . $category->get_hp_name() . '/' . $forum->get_hp_name(),
                 ));
             }
         }
