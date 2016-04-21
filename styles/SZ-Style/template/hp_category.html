@@ -5,9 +5,13 @@
         <h2 class="page_title">{HP_TITLE}</h2>
 
         <div class="content">
-            <!-- BEGIN forums -->
-            <li><img src="{forums.IMAGE}" /><a href="{forums.URL}">{forums.NAME}</a></li>
-            <!-- END forums -->
+            <ul style="list-style-type: none;">
+                <!-- BEGIN forums -->
+                <li style="width: 32%;float: left;text-align: center">
+                    <a href="{forums.URL}"><img src="{forums.IMAGE}" /><br />{forums.NAME}</a>
+                </li>
+                <!-- END forums -->
+            </ul>
         </div>
     </div>
 </div>
