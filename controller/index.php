@@ -101,7 +101,17 @@ class index
 
     public function displayCategory($category)
     {
-        return $this->helper->render('hp_body.html', $this->user->lang('HOMEPAGE'));
+        $forums = $categories = $this->container->get('tacitus89.homepage.categories')->get_categories($category);
+
+        foreach ($forums as $forum)
+        {
+            $this->template->assign_block_vars('forums', array(
+                'NAME'	    => $forum->get_name(),
+                'URL'		=> $this->getDomain() . $forum->get_hp_name(),
+            ));
+        }
+
+        return $this->helper->render('hp_category.html', $this->user->lang('HOMEPAGE'));
     }
 
 	/**

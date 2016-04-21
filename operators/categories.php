@@ -39,25 +39,38 @@ class categories
     /**
      * Get all rightful categories
      *
+     * @param string $category
      * @return \tacitus89\homepage\entity\category[] Array of category data entities
+     * @throws \tacitus89\homepage\exception\invalid_argument
+     * @throws \tacitus89\homepage\exception\out_of_bounds
      * @access public
      */
-    public function get_categories()
+    public function get_categories($category = '')
     {
         /** @var \tacitus89\homepage\entity\category[] $entities */
         $entities = array();
 
-        // Load all page data from the database
-        $sql = 'SELECT forum_id, parent_id, forum_name, hp_name, hp_desc
+        if($category == ''){
+            $sql = 'SELECT forum_id, parent_id, forum_name, hp_name, hp_desc
 			FROM ' . FORUMS_TABLE . '
 			WHERE hp_show = 1
 			ORDER BY left_id ASC';
+        }
+        else {
+            $sql = 'SELECT f1.forum_id, f1.parent_id, f1.forum_name, f1.hp_name, f1.hp_desc
+			FROM ' . FORUMS_TABLE . ' f1
+			RIGHT JOIN '. FORUMS_TABLE .' f2 ON (f2.left_id < f1.left_id AND f2.right_id > f1.right_id)
+			WHERE f1.hp_show = 1 AND f2.hp_show = 1
+			    AND f2.hp_name = "'. $category .'"
+			ORDER BY f1.left_id ASC';
+        }
+        // Load all page data from the database
         $result = $this->db->sql_query($sql);
 
         while ($row = $this->db->sql_fetchrow($result))
         {
             $category = $this->container->get('tacitus89.homepage.category')->import($row);
-            if($row['parent_id'] > 0)
+            if(isset($entities[$row['forum_id']]))
             {
                 $entities[$row['parent_id']]->add_forum($category);
             }
