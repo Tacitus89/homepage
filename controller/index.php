@@ -110,6 +110,13 @@ class index
                 'URL'		=> $this->getDomain() . $category . '/' . $forum->get_hp_name(),
                 'IMAGE'     => $this->root_path . $forum->get_forum_image(),
             ));
+
+            foreach ($forum->get_forums() as $subforum)
+            {
+                $this->template->assign_block_vars('forums.subforums', array(
+                    'NAME'	=> $subforum->get_name(),
+                ));
+            }
         }
 
         return $this->helper->render('hp_category.html', $this->user->lang('HOMEPAGE'));

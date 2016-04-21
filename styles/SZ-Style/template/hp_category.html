@@ -9,6 +9,15 @@
                 <!-- BEGIN forums -->
                 <li style="width: 32%;float: left;text-align: center">
                     <a href="{forums.URL}"><img src="{forums.IMAGE}" /><br />{forums.NAME}</a>
+
+                    <ul>
+                        <!-- BEGIN forums.subforums -->
+                        <li style="text-align: center">
+                            <a href="#">{forums.subforums.NAME}</a>
+                        </li>
+                        <!-- END forums.subforums -->
+                    </ul>
+
                 </li>
                 <!-- END forums -->
             </ul>
