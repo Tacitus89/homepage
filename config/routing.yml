@@ -1,6 +1,6 @@
 tacitus89_homepage_index:
     pattern: /
-    defaults: { _controller: tacitus89.homepage.index:display}
+    defaults: { _controller: tacitus89.homepage.index:displayIndex}
 tacitus89_homepage_category:
     pattern: /{category}
     defaults: { _controller: tacitus89.homepage.index:displayCategory, category: null}

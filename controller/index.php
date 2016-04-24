@@ -81,9 +81,19 @@ class index
 	 * @return null
 	 * @access public
 	 */
-	public function display()
+	public function displayIndex()
 	{
+        $announcements = $this->container->get('tacitus89.homepage.topics')->get_announcements();
 
+        foreach ($announcements as $element)
+        {
+            $this->template->assign_block_vars('announcements', array(
+                'TITLE'	    => $element->get_title(),
+                'TEXT'      => $element->get_message(),
+            ));
+        }
+
+        return $this->helper->render('hp_index.html', $this->user->lang('HOMEPAGE'));
 	}
 
     /**

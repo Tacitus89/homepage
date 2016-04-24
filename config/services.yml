@@ -30,8 +30,20 @@ services:
             arguments:
                 - @dbal.conn
 
+    tacitus89.homepage.topic:
+            class: tacitus89\homepage\entity\topic
+            scope: prototype # scope MUST be prototype for this to work!
+            arguments:
+                - @dbal.conn
+
     tacitus89.homepage.categories:
             class: tacitus89\homepage\operators\categories
             arguments:
                 - @service_container
                 - @dbal.conn
+
+    tacitus89.homepage.topics:
+                class: tacitus89\homepage\operators\topics
+                arguments:
+                    - @service_container
+                    - @dbal.conn
