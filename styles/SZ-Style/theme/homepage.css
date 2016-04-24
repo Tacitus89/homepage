@@ -1,0 +1,36 @@
+.forumbg {
+    width: 30%;
+    float: left;
+    text-align: center;
+    margin-left: 1%;
+    clear: none;
+}
+
+.link {
+    display: block;
+    border-top: #340c0c 1px solid;
+    padding: 5px 0;
+}
+
+.link:hover {
+    background-color: #c1ac80;
+}
+
+.inner, .forums {
+    height: 100%;
+}
+
+.hp_content {
+
+}
+
+.panel {
+    width: 70%;
+    float: left;
+    margin-top: 10px;
+}
+
+.sidebar {
+    float: right;
+    width: 24%;
+}

@@ -86,9 +86,26 @@ class index
 
 	}
 
+    /**
+     * Display a forum page
+     *
+     * @param $forum
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \tacitus89\homepage\exception\out_of_bounds
+     */
     public function displayForum($forum)
     {
         $page = $this->container->get('tacitus89.homepage.page')->load($forum);
+        $forums = $this->container->get('tacitus89.homepage.categories')->get_categories($forum);
+
+        foreach ($forums as $forum)
+        {
+            $this->template->assign_block_vars('forums', array(
+                'NAME'	    => $forum->get_name(),
+                'URL'		=> '#',
+                'IMAGE'     => $this->getForum() . $forum->get_forum_image(),
+            ));
+        }
 
         $this->template->assign_vars(array(
             'HP_TITLE'	    => $page->get_title(),
@@ -96,9 +113,15 @@ class index
         ));
 
 
-        return $this->helper->render('hp_body.html', $this->user->lang('HOMEPAGE'));
+        return $this->helper->render('hp_forum.html', $this->user->lang('HOMEPAGE'));
     }
 
+    /**
+     * Display all forum of a category
+     *
+     * @param $category
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function displayCategory($category)
     {
         $forums = $categories = $this->container->get('tacitus89.homepage.categories')->get_categories($category);
@@ -150,8 +173,23 @@ class index
     /**
      * Get domain
      */
-    private function getDomain()
+    private function getDomain($slash = true)
     {
-        return $this->config['server_protocol'] . $this->config['server_name'] . '/';
+        if($slash == true)
+        {
+            return $this->config['server_protocol'] . $this->config['server_name'] . '/';
+        }
+        else
+        {
+            return $this->config['server_protocol'] . $this->config['server_name'];
+        }
+    }
+
+    /**
+     * Get forum path
+     */
+    private function getForum()
+    {
+        return $this->getDomain(false) . $this->config['script_path'] . '/';
     }
 }

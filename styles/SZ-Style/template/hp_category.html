@@ -1,28 +1,35 @@
+<!-- INCLUDECSS @tacitus89_homepage/../theme/homepage.css -->
 <!-- INCLUDE overall_header.html -->
+<h2 class="page_title">{HP_TITLE}</h2>
 
-<div class="panel">
+<!-- BEGIN forums -->
+<div class="forumbg" style="">
     <div class="inner">
-        <h2 class="page_title">{HP_TITLE}</h2>
 
-        <div class="content">
-            <ul style="list-style-type: none;">
-                <!-- BEGIN forums -->
-                <li style="width: 32%;float: left;text-align: center">
-                    <a href="{forums.URL}"><img src="{forums.IMAGE}" /><br />{forums.NAME}</a>
+        <ul class="topiclist forums">
+            <li>
+                <a class="link" href="{forums.URL}"><img src="{forums.IMAGE}" /><br />{forums.NAME}</a>
 
-                    <ul>
-                        <!-- BEGIN forums.subforums -->
-                        <li style="text-align: center">
-                            <a href="#">{forums.subforums.NAME}</a>
-                        </li>
-                        <!-- END forums.subforums -->
-                    </ul>
+                <div>
+                    <!-- BEGIN forums.subforums -->
+                        <a class="link" href="#">{forums.subforums.NAME}</a>
+                    <!-- END forums.subforums -->
+                </div>
 
-                </li>
-                <!-- END forums -->
-            </ul>
-        </div>
+            </li>
+
+        </ul>
     </div>
 </div>
+<!-- END forums -->
+<br style="clear:both" />
 
+
+
+<!-- INCLUDEJS @tacitus89_homepage/jquery.matchHeight.js -->
 <!-- INCLUDE overall_footer.html -->
+<script>
+    $(function() {
+        $('.forumbg').matchHeight();
+    });
+</script>
