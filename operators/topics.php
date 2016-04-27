@@ -65,4 +65,28 @@ class topics
         // Return all topic entities
         return $entities;
     }
+
+    public function get_all_topics($forum_id, $max_topics)
+    {
+        /** @var \tacitus89\homepage\entity\topic[] $entities */
+        $entities = array();
+
+        $sql = 'SELECT t.topic_time, t.topic_views, t.topic_posts_approved as topic_posts, p.post_subject, p.post_text, p.bbcode_uid, p.bbcode_bitfield
+			FROM '. TOPICS_TABLE .' t
+			LEFT JOIN '. POSTS_TABLE .' p ON p.post_id = t.topic_first_post_id
+			WHERE t.forum_id = ' . $forum_id .'
+			ORDER BY t.topic_time ASC
+			LIMIT ' . $max_topics;
+        // Load all page data from the database
+        $result = $this->db->sql_query($sql);
+
+        while ($row = $this->db->sql_fetchrow($result))
+        {
+            $entities[] = $this->container->get('tacitus89.homepage.topic')->import($row);
+        }
+        $this->db->sql_freeresult($result);
+
+        // Return all topic entities
+        return $entities;
+    }
 }

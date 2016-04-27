@@ -93,6 +93,8 @@ class index
             ));
         }
 
+        $this->getNews(8, 'sz');
+
         return $this->helper->render('hp_index.html', $this->user->lang('HOMEPAGE'));
 	}
 
@@ -181,7 +183,28 @@ class index
 	}
 
     /**
+     * Set news to template
+     *
+     * @param integer $forum_id
+     * @param string $name
+     */
+    private function getNews($forum_id, $name)
+    {
+        $topics = $this->container->get('tacitus89.homepage.topics')->get_all_topics($forum_id, 10);
+
+        foreach ($topics as $topic)
+        {
+            $this->template->assign_block_vars('news_' . $name, array(
+                'TITLE'	    => $topic->get_title(),
+            ));
+        }
+    }
+
+    /**
      * Get domain
+     *
+     * @param bool $slash
+     * @return string
      */
     private function getDomain($slash = true)
     {
@@ -197,6 +220,8 @@ class index
 
     /**
      * Get forum path
+     *
+     * @return string
      */
     private function getForum()
     {
