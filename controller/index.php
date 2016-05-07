@@ -72,6 +72,7 @@ class index
 		$this->php_ext = $php_ext;
 
         $this->showMenu();
+        $this->user->add_lang_ext('tacitus89/homepage', 'homepage');
 	}
 
 	/**
