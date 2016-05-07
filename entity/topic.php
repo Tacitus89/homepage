@@ -92,7 +92,7 @@ class topic
             'topic_posts'             => 'integer',
             'post_subject'            => 'string',
             'post_text'               => 'string',
-            'bbcode_uid'              => 'integer',
+            'bbcode_uid'              => 'string',
             'bbcode_bitfield'         => 'string',
         );
 

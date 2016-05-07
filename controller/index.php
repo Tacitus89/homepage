@@ -83,15 +83,8 @@ class index
 	 */
 	public function displayIndex()
 	{
-        $announcements = $this->container->get('tacitus89.homepage.topics')->get_announcements();
 
-        foreach ($announcements as $element)
-        {
-            $this->template->assign_block_vars('announcements', array(
-                'TITLE'	    => $element->get_title(),
-                'TEXT'      => $element->get_message(),
-            ));
-        }
+        $this->getAnnouncements();
 
         $this->getNews(8, 'sz');
 
@@ -181,6 +174,23 @@ class index
             }
         }
 	}
+
+    /**
+     * Set Announcements to template
+     *
+     */
+    private function getAnnouncements()
+    {
+        $announcements = $this->container->get('tacitus89.homepage.topics')->get_announcements();
+
+        foreach ($announcements as $element)
+        {
+            $this->template->assign_block_vars('announcements', array(
+                'TITLE'	    => $element->get_title(),
+                'TEXT'      => $element->get_message(),
+            ));
+        }
+    }
 
     /**
      * Set news to template
