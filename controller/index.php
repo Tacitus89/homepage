@@ -188,6 +188,9 @@ class index
             $this->template->assign_block_vars('announcements', array(
                 'TITLE'	    => $element->get_title(),
                 'TEXT'      => $element->get_message(),
+                'COMMENTS'  => $element->get_answers(),
+                'DATE'      => date('d.m.Y H:i', $element->get_topic_time()),
+                'URL'       => $element->get_url($this->root_path, $this->php_ext),
             ));
         }
     }

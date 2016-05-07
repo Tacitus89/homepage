@@ -2,19 +2,10 @@
 <!-- INCLUDE overall_header.html -->
 <h2 class="page_title">{HP_TITLE}</h2>
 
-<!-- BEGIN announcements -->
-<div class="panel">
-    <div class="inner">
-        <h2 class="page_title">{announcements.TITLE}</h2>
+<!-- INCLUDE hp_announcements.html -->
 
-        <div class="hp_content">
-            {announcements.TEXT}
-        </div>
-    </div>
-</div>
-<!-- END announcements -->
 
-<div class="forumbg" style="">
+<div class="forumbg sidebar" style="">
     <div class="inner">
         <ul class="topiclist">
             <li class="header">
@@ -26,7 +17,17 @@
         <ul class="topiclist topics">
 <!-- BEGIN news_sz -->
             <li class="row bg1">
-                {news_sz.TITLE}
+                <dl class="icon topic_unread">
+                    <dt>
+                        <a href="./viewtopic.php?f=1129&amp;t=20524&amp;view=unread#unread" class="icon-link"></a>
+                        <div class="list-inner">
+                            <a href="./viewtopic.php?f=1129&amp;t=20524" class="topictitle">{news_sz.TITLE}</a>
+                            <br>20. März 2016 16:59</a>
+                        </div>
+                    </dt>
+                    <dd class="posts">12</dd>
+                </dl>
+
             </li>
 <!-- END news_sz -->
         </ul>

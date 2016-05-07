@@ -14,6 +14,8 @@ class topic
      * Data for this entity
      *
      * @var array
+     *      topic_id
+     *      forum_id
      *      topic_time
      *      topic_view
      *      topic_posts
@@ -50,7 +52,8 @@ class topic
      */
     public function load($id)
     {
-        $sql = 'SELECT t.topic_time, t.topic_views, t.topic_posts_approved as topic_posts, p.post_subject, p.post_text, p.bbcode_uid, p.bbcode_bitfield
+        $sql = 'SELECT t.topic_id, t.forum_id, t.topic_time, t.topic_views, t.topic_posts_approved as topic_posts,
+                p.post_subject, p.post_text, p.bbcode_uid, p.bbcode_bitfield
 			FROM '. TOPICS_TABLE .' t
 			LEFT JOIN '. POSTS_TABLE .' p ON p.post_id = t.topic_first_post_id
 			WHERE t.id = '. (int) $id;
@@ -87,6 +90,8 @@ class topic
         // All of our fields
         $fields = array(
             // column						=> data type (see settype())
+            'topic_id'                => 'integer',
+            'forum_id'                => 'integer',
             'topic_time'              => 'integer',
             'topic_views'             => 'integer',
             'topic_posts'             => 'integer',
@@ -124,6 +129,8 @@ class topic
 
         // Some fields must be unsigned (>= 0)
         $validate_unsigned = array(
+            'topic_id',
+            'forum_id',
             'topic_time',
             'topic_views',
             'topic_posts',
@@ -185,5 +192,13 @@ class topic
         $text = generate_text_for_display($text, $uid, $bitfield, $parse_flags, true);
 
         return $text;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function get_url($phpbb_root_path, $phpEx)
+    {
+        return append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $this->data['forum_id'] . '&amp;t=' . $this->data['topic_id']);
     }
 }
