@@ -135,7 +135,7 @@ class index
         {
             $this->template->assign_block_vars('forums', array(
                 'NAME'	    => $forum->get_name(),
-                'URL'		=> $this->getDomain() . $category . '/' . $forum->get_hp_name(),
+                'URL'		=> $this->getDomain() . $category . '/' . $forum->get_hp_url(),
                 'IMAGE'     => $this->root_path . $forum->get_forum_image(),
             ));
 
@@ -161,7 +161,7 @@ class index
         {
             $this->template->assign_block_vars('categories', array(
                 'NAME'	    => $category->get_name(),
-				'URL'		=> $this->getDomain() . $category->get_hp_name(),
+				'URL'		=> $this->getDomain() . $category->get_hp_url(),
             ));
 
             foreach ($category->get_forums() as $forum)
@@ -169,7 +169,7 @@ class index
                 $this->template->assign_block_vars('categories.forums', array(
                     'NAME'	=> $forum->get_name(),
                     'DESC'  => $forum->get_forum_desc(),
-                    'URL'   => $this->getDomain() . $category->get_hp_name() . '/' . $forum->get_hp_name(),
+                    'URL'   => $this->getDomain() . $category->get_hp_url() . '/' . $forum->get_hp_url(),
                 ));
             }
         }

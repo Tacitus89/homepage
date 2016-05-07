@@ -51,18 +51,18 @@ class categories
         $entities = array();
 
         if($category == ''){
-            $sql = 'SELECT f1.forum_id, f1.parent_id, f1.forum_name, f1.forum_desc, f1.forum_image, f1.hp_name, f1.hp_desc
+            $sql = 'SELECT f1.forum_id, f1.parent_id, f1.forum_name, f1.forum_desc, f1.forum_image, f1.hp_url, f1.hp_desc
 			FROM ' . FORUMS_TABLE . ' f1, '. FORUMS_TABLE .' f2
 			WHERE f2.hp_show = 1 AND f2.parent_id = 0 AND 
 			      (f1.hp_show = 1 AND (f1.parent_id = 0 OR f1.parent_id = f2.forum_id))
 			ORDER BY f1.left_id ASC';
         }
         else {
-            $sql = 'SELECT f1.forum_id, f1.parent_id, f1.forum_name, f1.forum_desc, f1.forum_image, f1.hp_name, f1.hp_desc
+            $sql = 'SELECT f1.forum_id, f1.parent_id, f1.forum_name, f1.forum_desc, f1.forum_image, f1.hp_url, f1.hp_desc
 			FROM ' . FORUMS_TABLE . ' f1
 			RIGHT JOIN '. FORUMS_TABLE .' f2 ON (f2.left_id < f1.left_id AND f2.right_id > f1.right_id)
 			WHERE f1.hp_show = 1 AND f2.hp_show = 1
-			    AND f2.hp_name = "'. $category .'"
+			    AND f2.hp_url = "'. $category .'"
 			ORDER BY f1.left_id ASC';
         }
         // Load all page data from the database

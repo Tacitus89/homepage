@@ -43,7 +43,7 @@ class install_0_0_1 extends \phpbb\db\migration\migration
 			'add_columns'	=> array(
 				$this->table_prefix . 'forums'		=> array(
 					'hp_show'			=> array('BOOL', 0),
-					'hp_name'			=> array('VCHAR:255', ''),
+					'hp_url'			=> array('VCHAR:255', ''),
 					'hp_post'			=> array('UINT:8', 0),
 					'hp_meta'			=> array('VCHAR:255', ''),
 					'hp_desc'			=> array('VCHAR:255', ''),

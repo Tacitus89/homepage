@@ -33,9 +33,15 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'FORUM_HP'			=> 'Forum für Homepage',
-	'FORUM_HP_SHOW'		=> 'Forum auf Homepage anzeigen',
-	'FORUM_HP_NAME'		=> 'Linknamen für das Forum',
-	'FORUM_HP_META'		=> 'Meta-Informationen für Forum',
-	'FORUM_HP_DESC'		=> 'Beschreibung fürs Forum',
+	'HOMEPAGE'			=> 'Einstellung für Homepage',
+	'HP_SHOW'			=> 'Forum auf Homepage anzeigen',
+	'HP_SHOW_EXPLAIN'   => 'Bei ja, wird das Forum auf der Homepage angezeigt. <b>Unabhängig von gesetzten Rechten!</b>',
+	'HP_URL'			=> 'Linkname',
+    'HP_URL_EXPLAIN'    => 'Mit diesem Link, ist das Forum auf der Homepage erreichbar. <b>Es muss einmalig sein!</b>',
+    'HP_POST'           => 'Beitrag anzeigen',
+    'HP_POST_EXPLAIN'   => 'Füge die ID-Nummer des Beitrages das angezeigt werden soll, wenn das Forum auf der Homepage aufgerufen wird. <b>Es wird nicht auf die gesetzten Rechte geachtet!</b>',
+	'HP_META'			=> 'Meta-Informationen für Forum',
+    'HP_META_EXPLAIN'   => 'Stichpunkte, die das Forum beschreibt. Nicht mehr wirklich wichtig.',
+	'HP_DESC'			=> 'Beschreibung fürs Forum',
+    'HP_DESC_EXPLAIN'   => 'Meta-Beschreibung fürs Forum',
 ));

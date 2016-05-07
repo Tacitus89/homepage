@@ -17,7 +17,7 @@ class category
      *      forum_id
      *      forum_name
      *      forum_image
-     *      hp_name
+     *      hp_url
      *      hp_desc
      * @access protected
      */
@@ -56,7 +56,7 @@ class category
      */
     public function load($id)
     {
-        $sql = 'SELECT forum_id, forum_name, forum_desc, forum_image, hp_name, hp_desc
+        $sql = 'SELECT forum_id, forum_name, forum_desc, forum_image, hp_url, hp_desc
 			FROM ' . FORUMS_TABLE . '
 			WHERE id = ' . (int) $id .'
 			    AND parent_id = 0 AND hp_show = 1';
@@ -97,7 +97,7 @@ class category
             'forum_name'					=> 'string',
             'forum_desc'                    => 'string',
             'forum_image'                   => 'string',
-            'hp_name'                       => 'string',
+            'hp_url'                       => 'string',
             'hp_desc'                       => 'string',
         );
 
@@ -189,14 +189,14 @@ class category
     }
 
     /**
-     * Get hp_name
+     * Get hp_url
      *
      * @return string Name
      * @access public
      */
-    public function get_hp_name()
+    public function get_hp_url()
     {
-        return (isset($this->data['hp_name'])) ? (string) $this->data['hp_name'] : '';
+        return (isset($this->data['hp_url'])) ? (string) $this->data['hp_url'] : '';
     }
 
     /**
