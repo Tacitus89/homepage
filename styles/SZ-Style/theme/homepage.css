@@ -1,9 +1,17 @@
 .forumbg {
-    width: 30%;
+/*    width: 30%;
     float: left;
     text-align: center;
     margin-left: 1%;
-    clear: none;
+    clear: none;*/
+}
+
+ul.topiclist dt {
+    margin-right: -100px;
+}
+
+ul.topiclist dt .list-inner {
+    margin-right: 100px;
 }
 
 .link {
@@ -20,17 +28,21 @@
     height: 100%;
 }
 
-.hp_content {
+.hp_text {
     font-size: 1.3em;
 }
 
 .panel {
-    width: 70%;
+    margin: 0 15px 20px 0;
+}
+
+.hp_content {
+    width: 74%;
     float: left;
     margin-top: 10px;
 }
 
 .sidebar {
     float: right;
-    width: 24%;
+    width: 26%;
 }

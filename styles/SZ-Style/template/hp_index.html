@@ -2,37 +2,14 @@
 <!-- INCLUDE overall_header.html -->
 <h2 class="page_title">{HP_TITLE}</h2>
 
-<!-- INCLUDE hp_announcements.html -->
-
-
-<div class="forumbg sidebar" style="">
-    <div class="inner">
-        <ul class="topiclist">
-            <li class="header">
-                <dl class="icon">
-                    <dd>Themen</dd>
-                </dl>
-            </li>
-        </ul>
-        <ul class="topiclist topics">
-<!-- BEGIN news_sz -->
-            <li class="row bg1">
-                <dl class="icon topic_unread">
-                    <dt>
-                        <a href="./viewtopic.php?f=1129&amp;t=20524&amp;view=unread#unread" class="icon-link"></a>
-                        <div class="list-inner">
-                            <a href="./viewtopic.php?f=1129&amp;t=20524" class="topictitle">{news_sz.TITLE}</a>
-                            <br>20. März 2016 16:59</a>
-                        </div>
-                    </dt>
-                    <dd class="posts">12</dd>
-                </dl>
-
-            </li>
-<!-- END news_sz -->
-        </ul>
-    </div>
+<div class="hp_content">
+    <!-- INCLUDE widgets/hp_announcements.html -->
 </div>
+
+<div class="sidebar">
+    <!-- INCLUDE widgets/hp_posts_forum.html -->
+</div>
+
 <br style="clear:both" />
 
 <!-- INCLUDE overall_footer.html -->

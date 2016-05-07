@@ -210,6 +210,9 @@ class index
         {
             $this->template->assign_block_vars('news_' . $name, array(
                 'TITLE'	    => $topic->get_title(),
+                'DATE'      => date('d.m.Y H:i', $topic->get_topic_time()),
+                'URL'       => $topic->get_url($this->root_path, $this->php_ext),
+                'COMMENTS'  => $topic->get_answers(),
             ));
         }
     }
