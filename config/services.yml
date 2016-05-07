@@ -47,3 +47,13 @@ services:
                 arguments:
                     - @service_container
                     - @dbal.conn
+
+    tacitus89.homepage.widgets:
+                class: tacitus89\homepage\operators\widgets
+                arguments:
+                    - @service_container
+                    - @dbal.conn
+                    - @template
+                    - @user
+                    - %core.root_path%
+                    - %core.php_ext%

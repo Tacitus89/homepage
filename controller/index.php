@@ -84,10 +84,13 @@ class index
 	 */
 	public function displayIndex()
 	{
+        $widget = $this->container->get('tacitus89.homepage.widgets');
 
-        $this->getAnnouncements();
+        $widget->getAnnouncements();
 
-        $this->getNews(8, 'sz');
+        $widget->getNews(8, 'sz');
+        $widget->getActiveUser();
+        $widget->getTeam();
 
         return $this->helper->render('hp_index.html', $this->user->lang('HOMEPAGE'));
 	}
@@ -175,47 +178,6 @@ class index
             }
         }
 	}
-
-    /**
-     * Set Announcements to template
-     *
-     */
-    private function getAnnouncements()
-    {
-        $announcements = $this->container->get('tacitus89.homepage.topics')->get_announcements();
-
-        foreach ($announcements as $element)
-        {
-            $this->template->assign_block_vars('announcements', array(
-                'TITLE'	    => $element->get_title(),
-                'TEXT'      => $element->get_message(),
-                'COMMENTS'  => $element->get_answers(),
-                'DATE'      => date('d.m.Y H:i', $element->get_topic_time()),
-                'URL'       => $element->get_url($this->root_path, $this->php_ext),
-            ));
-        }
-    }
-
-    /**
-     * Set news to template
-     *
-     * @param integer $forum_id
-     * @param string $name
-     */
-    private function getNews($forum_id, $name)
-    {
-        $topics = $this->container->get('tacitus89.homepage.topics')->get_all_topics($forum_id, 10);
-
-        foreach ($topics as $topic)
-        {
-            $this->template->assign_block_vars('news_' . $name, array(
-                'TITLE'	    => $topic->get_title(),
-                'DATE'      => date('d.m.Y H:i', $topic->get_topic_time()),
-                'URL'       => $topic->get_url($this->root_path, $this->php_ext),
-                'COMMENTS'  => $topic->get_answers(),
-            ));
-        }
-    }
 
     /**
      * Get domain
