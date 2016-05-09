@@ -111,7 +111,7 @@ class index
         {
             $this->template->assign_block_vars('forums', array(
                 'NAME'	    => $forum->get_name(),
-                'URL'		=> '#',
+                'URL'		=> $forum->get_url($this->root_path, $this->php_ext),
                 'IMAGE'     => $this->getForum() . $forum->get_forum_image(),
             ));
         }
@@ -147,6 +147,7 @@ class index
             {
                 $this->template->assign_block_vars('forums.subforums', array(
                     'NAME'	=> $subforum->get_name(),
+                    'URL'	=> $subforum->get_url($this->root_path, $this->php_ext),
                 ));
             }
         }

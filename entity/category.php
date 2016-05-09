@@ -231,4 +231,12 @@ class category
     {
         return $this->forums;
     }
+
+    /**
+     * @return mixed
+     */
+    public function get_url($phpbb_root_path, $phpEx)
+    {
+        return append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $this->data['forum_id']);
+    }
 }
