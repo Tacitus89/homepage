@@ -43,10 +43,13 @@ class install_0_0_1 extends \phpbb\db\migration\migration
 			'add_columns'	=> array(
 				$this->table_prefix . 'forums'		=> array(
 					'hp_show'			=> array('BOOL', 0),
+					'hp_special'		=> array('BOOL', 0),
 					'hp_url'			=> array('VCHAR:255', ''),
-					'hp_post'			=> array('UINT:8', 0),
+					'hp_post_id'		=> array('UINT:8', 0),
 					'hp_meta'			=> array('VCHAR:255', ''),
 					'hp_desc'			=> array('VCHAR:255', ''),
+					'hp_gallery'		=> array('UINT:8', 0),
+					'hp_game_id'		=> array('UINT:8', 0),
 				),
 			),
 		);
@@ -62,7 +65,7 @@ class install_0_0_1 extends \phpbb\db\migration\migration
 	{
 		return array(
 			'drop_columns'	=> array(
-				$this->table_prefix . 'forums' => array('hp_show', 'hp_name', 'hp_post','hp_meta', 'hp_desc'),
+				$this->table_prefix . 'forums' => array('hp_show', 'hp_special', 'hp_name', 'hp_post_id','hp_meta', 'hp_desc', 'hp_gellery_id', 'hp_game_id'),
 			),
 		);
 	}
