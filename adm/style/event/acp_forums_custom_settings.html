@@ -8,13 +8,19 @@
 
         </dl>
         <dl>
+            <dt><label for="homepage_special">{L_HP_SPECIAL}{L_COLON}</label><br><span>{L_HP_SPECIAL_EXPLAIN}</span></dt>
+            <dd><label><input type="radio" class="radio" name="homepage_special" value="1"<!-- IF S_HP_SPECIAL --> id="homepage_special" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+                <label><input type="radio" class="radio" name="homepage_special" value="0"<!-- IF not S_HP_SPECIAL --> id="homepage_special" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+
+        </dl>
+        <dl>
             <dt><label for="hp_url">{L_HP_URL}{L_COLON}</label><br><span>{L_HP_URL_EXPLAIN}</span></dt>
             <dd><input class="text medium" id="hp_url" name="hp_url" value="{HP_URL}" maxlength="255" type="text"></dd>
         </dl>
         <!-- IF S_FORUM_POST -->
         <dl>
-            <dt><label for="hp_post">{L_HP_POST}{L_COLON}</label><br><span>{L_HP_POST_EXPLAIN}</span></dt>
-            <dd><input class="text medium" id="hp_post" name="hp_post" value="{HP_POST}" maxlength="255" type="text"></dd>
+            <dt><label for="hp_post_id">{L_HP_POST}{L_COLON}</label><br><span>{L_HP_POST_EXPLAIN}</span></dt>
+            <dd><input class="text medium" id="hp_post_id" name="hp_post_id" value="{HP_POST_ID}" maxlength="255" type="text"></dd>
         </dl>
         <!-- ENDIF -->
         <dl>
@@ -25,5 +31,15 @@
             <dt><label for="hp_meta">{L_HP_META}{L_COLON}</label><br><span>{L_HP_META_EXPLAIN}</span></dt>
             <dd><input class="text medium" id="hp_meta" name="hp_meta" value="{HP_META}" maxlength="255" type="text"></dd>
         </dl>
+        <!-- IF S_FORUM_POST -->
+        <dl>
+            <dt><label for="hp_gallery_id">{L_HP_GALLERY}{L_COLON}</label><br><span>{L_HP_GALLERY_EXPLAIN}</span></dt>
+            <dd><input class="text medium" id="hp_gallery_id" name="hp_gallery_id" value="{HP_GALLERY_ID}" maxlength="255" type="text"></dd>
+        </dl>
+        <dl>
+            <dt><label for="hp_game_id">{L_HP_GAME}{L_COLON}</label><br><span>{L_HP_GAME_EXPLAIN}</span></dt>
+            <dd><input class="text medium" id="hp_game_id" name="hp_game_id" value="{HP_GAME_ID}" maxlength="255" type="text"></dd>
+        </dl>
+        <!-- ENDIF -->
     </fieldset>
 </div>

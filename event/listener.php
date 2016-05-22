@@ -64,7 +64,9 @@ class listener implements EventSubscriberInterface
 
         if($forum_data['forum_type'] == 1)
         {
-            $template_data['HP_POST'] = $forum_data['hp_post'];
+            $template_data['HP_POST_ID'] = $forum_data['hp_post_id'];
+            $template_data['HP_GALLERY_ID'] = $forum_data['hp_gallery_id'];
+            $template_data['HP_GAME_ID'] = $forum_data['hp_game_id'];
         }
         $template_data['HP_DESC'] = $forum_data['hp_desc'];
         $template_data['HP_META'] = $forum_data['hp_meta'];
@@ -85,10 +87,14 @@ class listener implements EventSubscriberInterface
         $forum_data['hp_url'] = $this->request->variable('hp_url', '');
         if($forum_data['forum_type'] == 1)
         {
-            $forum_data['hp_post'] = $this->request->variable('hp_post', 0);
+            $forum_data['hp_post_id'] = $this->request->variable('hp_post_id', 0);
+            $forum_data['hp_gallery_id'] = $this->request->variable('hp_gallery_id', 0);
+            $forum_data['hp_game_id'] = $this->request->variable('hp_game_id', 0);
         }
         else{
-            $forum_data['hp_post'] = 0;
+            $forum_data['hp_post_id'] = 0;
+            $forum_data['hp_gallery_id'] = 0;
+            $forum_data['hp_game_id'] = 0;
         }
         $forum_data['hp_desc'] = $this->request->variable('hp_desc', '');
         $forum_data['hp_meta'] = $this->request->variable('hp_meta', '');

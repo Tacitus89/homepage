@@ -49,7 +49,7 @@ class page
     {
         $sql = 'SELECT p.post_subject, p.post_text, p.bbcode_uid, p.bbcode_bitfield
 			FROM '. FORUMS_TABLE .' f
-			LEFT JOIN '. POSTS_TABLE .' p ON p.post_id = f.hp_post
+			LEFT JOIN '. POSTS_TABLE .' p ON p.post_id = f.hp_post_id
 			WHERE hp_url = "' . $this->db->sql_escape($name) .'"
 			    AND hp_show = 1';
         $result = $this->db->sql_query($sql);
