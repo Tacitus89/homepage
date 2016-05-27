@@ -16,6 +16,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class widgets
 {
+    /** @var \phpbb\config\config */
+    protected $config;
+
     /** @var ContainerInterface */
     protected $container;
 
@@ -37,6 +40,7 @@ class widgets
     /**
      * Constructor
      *
+     * @param \phpbb\config\config                  $config     Config object
      * @param ContainerInterface                    $container  Service container interface
      * @param \phpbb\db\driver\driver_interface     $db         Database connection
      * @param \phpbb\template\template              $template   Template object
@@ -46,13 +50,15 @@ class widgets
      * @return \tacitus89\homepage\operators\widgets
      * @access public
      */
-    public function __construct(ContainerInterface $container,
+    public function __construct(\phpbb\config\config $config,
+                                ContainerInterface $container,
                                 \phpbb\db\driver\driver_interface $db,
                                 \phpbb\template\template $template,
                                 \phpbb\user $user,
                                 $root_path,
                                 $php_ext)
     {
+        $this->config = $config;
         $this->container = $container;
         $this->db = $db;
         $this->template = $template;
@@ -140,5 +146,65 @@ class widgets
                 'USER_POSTS'        => $row['user_posts'],
             ));
         }
+    }
+
+    /**
+     * Get Images from Gallery
+     *
+     * @param int $gallery_id
+     * @access public
+     */
+    public function getImagesFromGallery($gallery_id)
+    {
+        if(!isset($this->config['phpbb_gallery_version']) || $gallery_id == 0)
+        {
+            return;
+        }
+
+        $sql = 'SELECT gi.image_id
+                FROM phpbb_gallery_images gi
+                WHERE gi.image_album_id = '. $gallery_id .'
+                ORDER BY gi.image_id DESC
+                LIMIT 8';
+
+        $result = $this->db->sql_query($sql);
+
+        while ($row = $this->db->sql_fetchrow($result))
+        {
+            $this->template->assign_block_vars('gallery_images', array(
+                'MINI'	    => append_sid("{$this->root_path}app.php/gallery/image/". $row['image_id'] ."/mini"),
+                'SOURCE'    => append_sid("{$this->root_path}app.php/gallery/image/". $row['image_id'] ."/source"),
+            ));
+        }
+    }
+
+    /**
+     * Get Images from Gallery
+     *
+     * @param int $gallery_id
+     * @access public
+     */
+    public function getInfoFromGameCollection($game_id)
+    {
+        if(!isset($this->config['games_active']) || $this->config['games_active'] == 0 || $game_id == 0)
+        {
+            return;
+        }
+
+        $sql = 'SELECT g.name, g.developer, g.publisher, g.genre, g.game_release
+                FROM phpbb_games g
+                WHERE g.id = '. $game_id;
+
+        $result = $this->db->sql_query($sql);
+        $row = $this->db->sql_fetchrow($result);
+        $this->template->assign_vars(array(
+            'S_GAME_INFO'       => true,
+            'GAME_NAME'         => $row['name'],
+            'GAME_DEVELOPER'    => $row['developer'],
+            'GAME_PUBLISHER'    => $row['publisher'],
+            'GAME_GENRE'        => $row['genre'],
+            'GAME_RELEASE'      => date('d.m.Y',$row['game_release']),
+
+        ));
     }
 }

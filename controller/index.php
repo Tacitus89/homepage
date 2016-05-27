@@ -121,6 +121,9 @@ class index
             'HP_CONTENT'	=> $page->get_message(),
         ));
 
+        $widget = $this->container->get('tacitus89.homepage.widgets');
+        $widget->getImagesFromGallery($page->get_gallery_id());
+        $widget->getInfoFromGameCollection($page->get_game_id());
 
         return $this->helper->render('hp_forum.html', $this->user->lang('HOMEPAGE'));
     }

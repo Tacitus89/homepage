@@ -14,8 +14,60 @@
 </div>
 
 <div class="sidebar">
+
+    <!-- IF S_GAME_INFO -->
     <div class="forumbg">
         <div class="inner">
+            <ul class="topiclist forums">
+                <li class="header">
+                    <dl class="icon">
+                        <dt><div class="list-inner">Themen</div></dt>
+                        <dd class="posts">Antworten</dd>
+                    </dl>
+                </li>
+                <li>
+                    <div>
+                        <ul>
+                            <li>Name: {GAME_NAME}</li>
+                            <li>Entwickler: {GAME_DEVELOPER}</li>
+                            <li>Publisher: {GAME_PUBLISHER}</li>
+                            <li>Genre: {GAME_GENRE}</li>
+                            <li>Release: {GAME_RELEASE}</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- ENDIF -->
+
+    <!-- IF .gallery_images -->
+    <div class="forumbg">
+        <div class="inner">
+            <ul class="topiclist forums">
+                <li>
+                    <div>
+                        <!-- BEGIN gallery_images -->
+                        <img src="{gallery_images.MINI}" />
+                        <!--<a class="link" href="{forums.URL}"><img src="{forums.IMAGE}" /><br />{forums.NAME}</a>-->
+                        <!-- END gallery_images -->
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- ENDIF -->
+
+    <!-- IF .forums -->
+    <div class="forumbg">
+        <div class="inner">
+            <ul class="topiclist">
+                <li class="header">
+                    <dl class="icon">
+                        <dt><div class="list-inner">{L_SUBFORUMS}</div></dt>
+                    </dl>
+                </li>
+            </ul>
             <ul class="topiclist forums">
                 <li>
                     <div>
@@ -27,6 +79,7 @@
             </ul>
         </div>
     </div>
+    <!-- ENDIF -->
 </div>
 
 <br style="clear:both" />

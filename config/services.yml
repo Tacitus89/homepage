@@ -43,17 +43,18 @@ services:
                 - @dbal.conn
 
     tacitus89.homepage.topics:
-                class: tacitus89\homepage\operators\topics
-                arguments:
-                    - @service_container
-                    - @dbal.conn
+            class: tacitus89\homepage\operators\topics
+            arguments:
+                - @service_container
+                - @dbal.conn
 
     tacitus89.homepage.widgets:
-                class: tacitus89\homepage\operators\widgets
-                arguments:
-                    - @service_container
-                    - @dbal.conn
-                    - @template
-                    - @user
-                    - %core.root_path%
-                    - %core.php_ext%
+            class: tacitus89\homepage\operators\widgets
+            arguments:
+                - @config
+                - @service_container
+                - @dbal.conn
+                - @template
+                - @user
+                - %core.root_path%
+                - %core.php_ext%

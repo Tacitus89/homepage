@@ -47,7 +47,7 @@ class page
      */
     public function load($name)
     {
-        $sql = 'SELECT p.post_subject, p.post_text, p.bbcode_uid, p.bbcode_bitfield
+        $sql = 'SELECT p.post_subject, p.post_text, p.bbcode_uid, p.bbcode_bitfield, f.hp_gallery_id, f.hp_game_id
 			FROM '. FORUMS_TABLE .' f
 			LEFT JOIN '. POSTS_TABLE .' p ON p.post_id = f.hp_post_id
 			WHERE hp_url = "' . $this->db->sql_escape($name) .'"
@@ -93,5 +93,27 @@ class page
         $text = generate_text_for_display($text, $uid, $bitfield, $parse_flags, true);
 
         return $text;
+    }
+
+    /**
+     * Get Gallery ID
+     *
+     * @return int Gallery ID
+     * @access public
+     */
+    public function get_gallery_id()
+    {
+        return (int) $this->data['hp_gallery_id'];
+    }
+
+    /**
+     * Get Game ID
+     *
+     * @return int Game ID
+     * @access public
+     */
+    public function get_game_id()
+    {
+        return (int) $this->data['hp_game_id'];
     }
 }
