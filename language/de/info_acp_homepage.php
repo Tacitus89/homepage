@@ -36,6 +36,8 @@ $lang = array_merge($lang, array(
 	'HOMEPAGE'			=> 'Einstellung für Homepage',
 	'HP_SHOW'			=> 'Forum auf Homepage anzeigen',
 	'HP_SHOW_EXPLAIN'   => 'Bei ja, wird das Forum auf der Homepage angezeigt. <br /><b>Unabhängig von gesetzten Rechten!</b>',
+	'HP_SPECIAL'		=> 'Spezialkategorie',
+	'HP_SPECIAL_EXPLAIN'=> 'Soll es in der Spezialkategorie angezeigt werden?',
 	'HP_URL'			=> 'Linkname',
     'HP_URL_EXPLAIN'    => 'Mit diesem Link, ist das Forum auf der Homepage erreichbar. <br /><b>Es muss einmalig sein!</b>',
     'HP_POST'           => 'Beitrag anzeigen',
@@ -44,4 +46,8 @@ $lang = array_merge($lang, array(
     'HP_META_EXPLAIN'   => 'Stichpunkte, die das Forum beschreibt. Nicht mehr wirklich wichtig.',
 	'HP_DESC'			=> 'Beschreibung fürs Forum',
     'HP_DESC_EXPLAIN'   => 'Meta-Beschreibung fürs Forum',
+	'HP_GALLERY'		=> 'Bilder aus der Galerie',
+	'HP_GALLERY_EXPLAIN'=> 'Füge ID des Album ein.',
+	'HP_GAME'			=> 'Infos zum Game',
+	'HP_GAME_EXPLAIN'	=> 'Füge ID des Games ein',
 ));
