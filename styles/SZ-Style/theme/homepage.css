@@ -6,12 +6,44 @@
     clear: none;
 }
 
+ul.topiclist li::after {
+	content: '';
+	clear: both;
+	display: block;
+}
+
 ul.topiclist dt {
-    margin-right: -100px;
+	padding: 4px;
+    margin-right: -115px;
 }
 
 ul.topiclist dt .list-inner {
     margin-right: 100px;
+}
+
+ul.forums div {
+	background-color: #decba4;
+}
+
+ul.forums li {
+	font-size: 12px;
+}
+
+ul.forums dt {
+	margin-right: -150px;
+}
+
+ul.forums .gallery a:first-child {
+	display: block;
+}
+
+ul.forums .gallery a {
+	display: none;
+}
+
+ul.forums .gallery img {
+	display: block;
+	margin: 0 auto;
 }
 
 .link {
@@ -29,8 +61,33 @@ ul.topiclist dt .list-inner {
     height: 100%;
 }
 
+.content h2, .panel h2 {
+	font-size: 2em;
+}
+
+.content h1, .panel h1 {
+	color: #000;
+    font-weight: normal;
+    border-bottom: 1px solid #380d0d;
+    font-size: 2em;
+    margin: 0.5em 0 0.5em 0;
+    padding-bottom: 0.5em;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
 .hp_text {
+	clear: both;
+    min-height: 3em;
+    overflow: hidden;
+    line-height: 1.4em;
+    font-family: "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
     font-size: 1.3em;
+	overflow-x: auto;
+}
+
+.hp_text ul {
+	margin-bottom: 1em;
+    margin-left: 3em;
 }
 
 .panel {
@@ -46,4 +103,51 @@ ul.topiclist dt .list-inner {
 .sidebar {
     float: right;
     width: 26%;
+}
+
+.teamspeak {
+	text-align: center;
+}
+
+ul.links, ul.donate {
+    padding: 10px 0;
+}
+
+ul.links li::after, ul.links::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+ul.links li {
+	float: left;
+	width: 33%;
+}
+
+ul.links a {
+	display:block;
+	width: 32px;
+	height: 32px;
+	margin: 0 auto;
+}
+
+ul.donate {
+	border-top: 1px solid #000;
+	text-align: center;
+}
+
+.forums .online_user {
+	padding: 5px;
+}
+
+.facebook {
+	background-image: url("./facebook.png");
+}
+
+.steam {
+	background-image: url("./steam.png");
+}
+
+.youtube {
+	background-image: url("./youtube.png");
 }

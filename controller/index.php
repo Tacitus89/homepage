@@ -73,6 +73,11 @@ class index
 
         $this->showMenu();
         $this->user->add_lang_ext('tacitus89/homepage', 'homepage');
+		
+		$this->template->assign_vars(array(
+			'U_HOME'		=> $this->getDomain(false),
+			'U_MODDING'		=> $this->getDomain() . 'modding',
+        ));
 	}
 
 	/**
@@ -88,11 +93,18 @@ class index
 
         $widget->getAnnouncements();
 
+		$widget->getActiveTopics(5);
         $widget->getNews(8, 'sz');
+		$widget->getUserOnline();
         $widget->getActiveUser();
+		$widget->getNewUser();
         $widget->getTeam();
+		
+		$this->template->assign_vars(array(
+			'META'			=> '<meta name="description" content="Das größte deutsche Forum für Strategiespiele aller Art. Egal ob es sich um die Total War-Serie, Europa Universalis, Hearts of Iron, Crusader Kings, oder Stellaris handelt, hier tauscht man sich aus, spielt miteinander und genießt das Leben." />',
+        ));
 
-        return $this->helper->render('hp_index.html', $this->user->lang('HOMEPAGE'));
+        return $this->helper->render('hp_index.html', 'Startseite');
 	}
 
     /**
@@ -104,7 +116,14 @@ class index
      */
     public function displayForum($forum)
     {
-        $page = $this->container->get('tacitus89.homepage.page')->load($forum);
+		try
+		{
+			$page = $this->container->get('tacitus89.homepage.page')->load($forum);
+		}
+		catch (\tacitus89\homepage\exception\base $e)
+		{
+			redirect(append_sid($this->getDomain() . '404.html'));
+		}
         $forums = $this->container->get('tacitus89.homepage.categories')->get_categories($forum);
 
         foreach ($forums as $forum)
@@ -117,15 +136,17 @@ class index
         }
 
         $this->template->assign_vars(array(
+			'U_FORUM'		=> $page->get_url($this->root_path, $this->php_ext),
             'HP_TITLE'	    => $page->get_title(),
             'HP_CONTENT'	=> $page->get_message(),
+			'META'			=> $page->get_desc(),
         ));
 
         $widget = $this->container->get('tacitus89.homepage.widgets');
         $widget->getImagesFromGallery($page->get_gallery_id());
         $widget->getInfoFromGameCollection($page->get_game_id());
 
-        return $this->helper->render('hp_forum.html', $this->user->lang('HOMEPAGE'));
+        return $this->helper->render('hp_forum.html', $page->get_title());
     }
 
     /**
@@ -136,13 +157,29 @@ class index
      */
     public function displayCategory($category)
     {
-        $forums = $categories = $this->container->get('tacitus89.homepage.categories')->get_categories($category);
+		try
+		{
+			if($category == 'modding')
+			{
+				$category = $this->container->get('tacitus89.homepage.category')->load_by_id(543);
+			}
+			else
+			{
+				$category = $this->container->get('tacitus89.homepage.category')->load($category);
+			}
+		}
+		catch (\tacitus89\homepage\exception\base $e)
+		{
+			redirect(append_sid($this->getDomain() . '404.html'));
+		}
+		
+        $forums = $this->container->get('tacitus89.homepage.categories')->get_categories($category->get_hp_url());
 
         foreach ($forums as $forum)
         {
             $this->template->assign_block_vars('forums', array(
                 'NAME'	    => $forum->get_name(),
-                'URL'		=> $this->getDomain() . $category . '/' . $forum->get_hp_url(),
+                'URL'		=> $this->getDomain() . $category->get_hp_url() . '/' . $forum->get_hp_url(),
                 'IMAGE'     => $this->root_path . $forum->get_forum_image(),
             ));
 
@@ -154,8 +191,18 @@ class index
                 ));
             }
         }
+		
+		$this->template->assign_vars(array(
+			'META'			=> $category->get_desc(),
+        ));
+		
+		$page_title = $category->get_name();
+		if($category->get_id() == 543)
+		{
+			$page_title = 'Modding';
+		}
 
-        return $this->helper->render('hp_category.html', $this->user->lang('HOMEPAGE'));
+        return $this->helper->render('hp_category.html', $page_title);
     }
 
 	/**
@@ -167,10 +214,10 @@ class index
 
         foreach ($categories as $category)
         {
-            $this->template->assign_block_vars('categories', array(
-                'NAME'	    => $category->get_name(),
+			$this->template->assign_block_vars('categories', array(
+				'NAME'	    => $category->get_name(),
 				'URL'		=> $this->getDomain() . $category->get_hp_url(),
-            ));
+			));
 
             foreach ($category->get_forums() as $forum)
             {
@@ -195,10 +242,8 @@ class index
         {
             return $this->config['server_protocol'] . $this->config['server_name'] . '/';
         }
-        else
-        {
-            return $this->config['server_protocol'] . $this->config['server_name'];
-        }
+        
+		return $this->config['server_protocol'] . $this->config['server_name'];
     }
 
     /**

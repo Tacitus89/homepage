@@ -75,11 +75,32 @@ class widgets
      */
     public function getNews($forum_id, $name)
     {
-        $topics = $this->container->get('tacitus89.homepage.topics')->get_all_topics($forum_id, 10);
+        $topics = $this->container->get('tacitus89.homepage.topics')->get_all_topics($forum_id, 2);
 
         foreach ($topics as $topic)
         {
             $this->template->assign_block_vars('news_' . $name, array(
+                'TITLE'	    => $topic->get_title(),
+                'DATE'      => date('d.m.Y H:i', $topic->get_topic_time()),
+                'URL'       => $topic->get_url($this->root_path, $this->php_ext),
+                'COMMENTS'  => $topic->get_answers(),
+            ));
+        }
+    }
+	
+	/**
+     * Set news to template
+     *
+     * @param integer $forum_id
+     * @param string $name
+     */
+    public function getActiveTopics($max_topics = 10)
+    {
+        $topics = $this->container->get('tacitus89.homepage.topics')->get_active_topics($max_topics);
+
+        foreach ($topics as $topic)
+        {
+            $this->template->assign_block_vars('active_topics', array(
                 'TITLE'	    => $topic->get_title(),
                 'DATE'      => date('d.m.Y H:i', $topic->get_topic_time()),
                 'URL'       => $topic->get_url($this->root_path, $this->php_ext),
@@ -110,11 +131,11 @@ class widgets
 
     public function getTeam()
     {
-        $sql = 'SELECT u.user_id, u.username, u.user_colour, g.group_id, g.group_name, g.group_colour
+        $sql = 'SELECT u.user_id, u.username, u.user_colour, g.group_id, g.group_name, g.group_colour, g.group_type
                 FROM '. USERS_TABLE .' u
                 LEFT JOIN '. GROUPS_TABLE .' g ON g.group_id = u.group_id
-                WHERE u.group_id = 5 OR  u.group_id = 8
-                ORDER BY u.username DESC';
+                WHERE u.group_id = 5 OR u.group_id = 8
+                ORDER BY u.group_id, u.username ASC';
 
         $result = $this->db->sql_query($sql);
 
@@ -123,7 +144,7 @@ class widgets
             $this->template->assign_block_vars('team', array(
                 'USERNAME_FULL'	    => get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
                 'GROUP_COLOUR'      => $row['group_colour'],
-                'GROUP_NAME'        => $this->user->lang['G_' . $row['group_name']],
+                'GROUP_NAME'        => ($row['group_type'] == GROUP_SPECIAL) ? $this->user->lang['G_' . $row['group_name']] : $row['group_name'],
                 'U_GROUPS'          => append_sid("{$this->root_path}memberlist.$this->php_ext", 'mode=group&amp;g=' . $row['group_id']),
             ));
         }
@@ -135,13 +156,31 @@ class widgets
                 FROM '. USERS_TABLE .' u
                 WHERE u.user_posts > 0
                 ORDER BY u.user_posts DESC
-                LIMIT 8';
+                LIMIT 10';
 
         $result = $this->db->sql_query($sql);
 
         while ($row = $this->db->sql_fetchrow($result))
         {
             $this->template->assign_block_vars('active_user', array(
+                'USERNAME_FULL'	    => get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
+                'USER_POSTS'        => $row['user_posts'],
+            ));
+        }
+    }
+	
+	public function getNewUser()
+    {
+        $sql = 'SELECT u.user_id, u.username, u.user_colour, u.user_posts
+                FROM '. USERS_TABLE .' u
+                ORDER BY u.user_regdate DESC
+                LIMIT 5';
+
+        $result = $this->db->sql_query($sql);
+
+        while ($row = $this->db->sql_fetchrow($result))
+        {
+            $this->template->assign_block_vars('new_user', array(
                 'USERNAME_FULL'	    => get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
                 'USER_POSTS'        => $row['user_posts'],
             ));
@@ -207,4 +246,20 @@ class widgets
 
         ));
     }
+	
+	public function getUserOnline()
+	{
+		$online_users = obtain_users_online();
+		//$user_online_strings = obtain_users_online_string($online_users);
+		
+		
+		$visible_online = $this->user->lang('REG_USERS_TOTAL', (int) $online_users['visible_online']);
+		$hidden_online = $this->user->lang('HIDDEN_USERS_TOTAL', (int) $online_users['hidden_online']);
+		$guests_online = $this->user->lang('GUEST_USERS_TOTAL', (int) $online_users['guests_online']);
+		$l_online_users = $this->user->lang('ONLINE_USERS_TOTAL_GUESTS', (int) $online_users['total_online'], $visible_online, $hidden_online, $guests_online);
+		
+		$this->template->assign_vars(array(
+			'USERS_ONLINE'	=> $l_online_users,
+        ));
+	}
 }

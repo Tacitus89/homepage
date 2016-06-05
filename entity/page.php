@@ -47,7 +47,8 @@ class page
      */
     public function load($name)
     {
-        $sql = 'SELECT p.post_subject, p.post_text, p.bbcode_uid, p.bbcode_bitfield, f.hp_gallery_id, f.hp_game_id
+        $sql = 'SELECT p.forum_id, p.topic_id, p.post_text, p.bbcode_uid, p.bbcode_bitfield,
+				f.forum_name, f.hp_desc, f.hp_gallery_id, f.hp_game_id
 			FROM '. FORUMS_TABLE .' f
 			LEFT JOIN '. POSTS_TABLE .' p ON p.post_id = f.hp_post_id
 			WHERE hp_url = "' . $this->db->sql_escape($name) .'"
@@ -73,7 +74,7 @@ class page
      */
     public function get_title()
     {
-        return (isset($this->data['post_subject'])) ? (string) $this->data['post_subject'] : '';
+        return (isset($this->data['forum_name'])) ? (string) $this->data['forum_name'] : '';
     }
 
     /**
@@ -93,6 +94,17 @@ class page
         $text = generate_text_for_display($text, $uid, $bitfield, $parse_flags, true);
 
         return $text;
+    }
+	
+	/**
+     * Get Meta Description
+     *
+     * @return string Meta-Description
+     * @access public
+     */
+    public function get_desc()
+    {
+        return '<meta name="description" content="'.$this->data['hp_desc'] .'" />';
     }
 
     /**
@@ -115,5 +127,13 @@ class page
     public function get_game_id()
     {
         return (int) $this->data['hp_game_id'];
+    }
+	
+	/**
+     * @return mixed
+     */
+    public function get_url($phpbb_root_path, $phpEx)
+    {
+        return append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $this->data['forum_id'] . '&amp;t=' . $this->data['topic_id']);
     }
 }

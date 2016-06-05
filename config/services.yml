@@ -47,6 +47,7 @@ services:
             arguments:
                 - @service_container
                 - @dbal.conn
+                - @auth
 
     tacitus89.homepage.widgets:
             class: tacitus89\homepage\operators\widgets

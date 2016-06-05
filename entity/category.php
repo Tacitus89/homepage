@@ -54,12 +54,45 @@ class category
      * @access public
      * @throws \tacitus89\homepage\exception\out_of_bounds
      */
-    public function load($id)
+    public function load($name)
     {
         $sql = 'SELECT forum_id, forum_name, forum_desc, forum_image, hp_url, hp_desc
 			FROM ' . FORUMS_TABLE . '
-			WHERE id = ' . (int) $id .'
+			WHERE hp_url = "'. $this->db->sql_escape($name) .'"
 			    AND parent_id = 0 AND hp_show = 1';
+        $result = $this->db->sql_query($sql);
+        $this->data = $this->db->sql_fetchrow($result);
+        $this->db->sql_freeresult($result);
+
+        if ($this->data === false)
+        {
+            // A page does not exist
+            throw new \tacitus89\homepage\exception\out_of_bounds('id');
+        }
+
+        return $this;
+    }
+	
+	/**
+     * Load the data from the database for this page
+     *
+     * @param int $id Category identifier
+     * @return page $this object for chaining calls; load()->set()->save()
+     * @access public
+     * @throws \tacitus89\homepage\exception\out_of_bounds
+     */
+    public function load_by_id($id)
+    {
+		$sql = 'SELECT forum_id, forum_name, forum_desc, forum_image, hp_url, hp_desc
+			FROM ' . FORUMS_TABLE . '
+			WHERE (forum_id = "'. $id .'" AND parent_id = 0 AND hp_show = 1)';
+		if($id == 543)
+		{
+			$sql = 'SELECT forum_id, forum_name, forum_desc, forum_image, hp_url, hp_desc
+				FROM ' . FORUMS_TABLE . '
+				WHERE (forum_id = "'. $id .'")';
+		}
+        
         $result = $this->db->sql_query($sql);
         $this->data = $this->db->sql_fetchrow($result);
         $this->db->sql_freeresult($result);
@@ -198,16 +231,16 @@ class category
     {
         return (isset($this->data['hp_url'])) ? (string) $this->data['hp_url'] : '';
     }
-
-    /**
-     * Get hp_desc
+	
+	/**
+     * Get Meta Description
      *
-     * @return string Name
+     * @return string Meta-Description
      * @access public
      */
-    public function get_hp_desc()
+    public function get_desc()
     {
-        return (isset($this->data['hp_desc'])) ? (string) $this->data['hp_desc'] : '';
+        return '<meta name="description" content="'.$this->data['hp_desc'] .'" />';
     }
 
     /**

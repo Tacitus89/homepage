@@ -2,9 +2,10 @@
 <html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
 <head>
 <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 {META}
-<title><!-- IF UNREAD_NOTIFICATIONS_COUNT -->({UNREAD_NOTIFICATIONS_COUNT}) <!-- ENDIF --><!-- IF not S_VIEWTOPIC and not S_VIEWFORUM -->{SITENAME} - <!-- ENDIF --><!-- IF S_IN_MCP -->{L_MCP} - <!-- ELSEIF S_IN_UCP -->{L_UCP} - <!-- ENDIF -->{PAGE_TITLE}<!-- IF S_VIEWTOPIC or S_VIEWFORUM --> - {SITENAME}<!-- ENDIF --></title>
+<title>{PAGE_TITLE} - {SITENAME}</title>
 
 <!-- IF U_CANONICAL -->
 	<link rel="canonical" href="{U_CANONICAL}">
@@ -37,96 +38,18 @@
 </head>
 <body id="phpbb" class="nojs notouch section-{SCRIPT_NAME} {S_CONTENT_DIRECTION} {BODY_CLASS}">
 
-<!-- EVENT overall_header_body_before -->
-
-<div id="fade-nav-menu" class="navbar hidden" role="navigation">
-	<ul id="nav-main" class="linklist bulletin" role="menubar">
-		<li id="quick-links" class="small-icon responsive-menu dropdown-container<!-- IF not S_DISPLAY_QUICK_LINKS and not S_DISPLAY_SEARCH --> hidden<!-- ENDIF -->" data-skip-responsive="true">
-			<a href="#" class="responsive-menu-link dropdown-trigger">{L_QUICK_LINKS}</a>
-			<div class="dropdown hidden">
-				<div class="pointer"><div class="pointer-inner"></div></div>
-				<ul class="dropdown-contents" role="menu">
-					<!-- EVENT navbar_header_quick_links_before -->
-
-					<!-- IF S_DISPLAY_SEARCH -->
-						<li class="separator"></li>
-						<li class="small-icon icon-search-active"><a href="{U_SEARCH_ACTIVE_TOPICS}" role="menuitem">{L_SEARCH_ACTIVE_TOPICS}</a></li>
-						<!-- IF S_USER_LOGGED_IN -->
-							<li class="small-icon icon-search-new"><a href="{U_SEARCH_NEW}" role="menuitem">{L_SEARCH_NEW}</a></li>
-						<!-- ENDIF -->
-						<!-- IF S_LOAD_UNREADS --> 
-							<li class="small-icon icon-search-unread"><a href="{U_SEARCH_UNREAD}" role="menuitem">{L_SEARCH_UNREAD}</a></li>
-						<!-- ENDIF -->
-						<!-- IF S_REGISTERED_USER -->
-							<li class="small-icon icon-search-unanswered"><a href="{U_SEARCH_UNANSWERED}" role="menuitem">{L_SEARCH_UNANSWERED}</a></li>
-							<li class="small-icon icon-search-self"><a href="{U_SEARCH_SELF}" role="menuitem">{L_SEARCH_SELF}</a></li>
-						<!-- ENDIF -->
-						<li class="separator"></li>
-						<li class="small-icon icon-search"><a href="{U_SEARCH}" role="menuitem">{L_SEARCH}</a></li>
-					<!-- ENDIF -->
-
-					<!-- IF not S_IS_BOT and (S_DISPLAY_MEMBERLIST or U_TEAM) -->
-						<li class="separator"></li>
-						<!-- IF S_DISPLAY_MEMBERLIST --><li class="small-icon icon-members"><a href="{U_MEMBERLIST}" role="menuitem">{L_MEMBERLIST}</a></li><!-- ENDIF -->
-						<!-- IF U_TEAM --><li class="small-icon icon-team"><a href="{U_TEAM}" role="menuitem">{L_THE_TEAM}</a></li><!-- ENDIF -->
-					<!-- ENDIF -->
-					<li class="separator"></li>
-
-					<!-- EVENT navbar_header_quick_links_after -->
-				</ul>
-			</div>
-		</li>
-		<li class="small-icon icon-home breadcrumbs">
-			<!-- IF U_SITE_HOME --><span class="crumb"><a href="{U_SITE_HOME}"{$MICRODATA} data-navbar-reference="home">{L_SITE_HOME}</a></span><!-- ENDIF -->
-			<!-- EVENT overall_header_breadcrumb_prepend -->
-			<span class="crumb"><a href="{U_INDEX}" accesskey="h"{$MICRODATA} data-navbar-reference="index">{L_INDEX}</a></span>
-			<!-- BEGIN navlinks -->
-				<!-- EVENT overall_header_navlink_prepend -->
-				<span class="crumb"><a href="{navlinks.U_VIEW_FORUM}"{$MICRODATA}<!-- IF navlinks.MICRODATA --> {navlinks.MICRODATA}<!-- ENDIF -->>{navlinks.FORUM_NAME}</a></span>
-				<!-- EVENT overall_header_navlink_append -->
-			<!-- END navlinks -->
-			<!-- EVENT overall_header_breadcrumb_append -->
-		</li>
-		<!-- IF S_REGISTERED_USER -->
-		<li id="username_logged_in" class="rightside <!-- IF CURRENT_USER_AVATAR --> no-bulletin<!-- ENDIF -->" data-skip-responsive="true">
-			<div class="header-profile dropdown-container">
-				<a href="{U_PROFILE}" class="header-avatar dropdown-trigger"><!-- IF CURRENT_USER_AVATAR -->{CURRENT_USER_AVATAR} <!-- ENDIF -->{CURRENT_USERNAME_SIMPLE}</a>
-				<div class="dropdown hidden">
-					<div class="pointer"><div class="pointer-inner"></div></div>
-					<ul class="dropdown-contents" role="menu">
-						<!-- IF U_RESTORE_PERMISSIONS --><li class="small-icon icon-restore-permissions"><a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a></li><!-- ENDIF -->
-		
-						<li class="small-icon icon-ucp"><a href="{U_PROFILE}" title="{L_PROFILE}" role="menuitem">{L_PROFILE}</a></li>
-						<li class="small-icon icon-profile"><a href="{U_USER_PROFILE}" title="{L_READ_PROFILE}" role="menuitem">{L_READ_PROFILE}</a></li>
-		
-						<li class="separator"></li>
-						<li class="small-icon icon-logout"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x" role="menuitem">{L_LOGIN_LOGOUT}</a></li>
-					</ul>
-				</div>
-			</div>
-		</li>
-	<!-- ELSE -->
-		<li class="small-icon icon-logout rightside"  data-skip-responsive="true"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x" role="menuitem">{L_LOGIN_LOGOUT}</a></li>
-		<!-- IF S_REGISTER_ENABLED and not (S_SHOW_COPPA or S_REGISTRATION) -->
-			<li class="small-icon icon-register rightside" data-skip-responsive="true"><a href="{U_REGISTER}" role="menuitem">{L_REGISTER}</a></li>
-		<!-- ENDIF -->
-	<!-- ENDIF -->
-	</ul>
-</div>
-
 <div id="wrap">
 	<a id="top" class="anchor" accesskey="t"></a>
 	<div id="page-header">
 		<div class="headermenu">
 			<div class="headerbar" role="banner">
-				<h1><a id="logo" href="<!-- IF U_SITE_HOME -->{U_SITE_HOME}<!-- ELSE -->{U_INDEX}<!-- ENDIF -->" title="<!-- IF U_SITE_HOME -->{L_SITE_HOME}<!-- ELSE -->{L_INDEX}<!-- ENDIF -->">{SITENAME}</a></h1>
+				<h1><a id="logo" href="{U_HOME}" title="{L_SITE_HOME}">{SITENAME}</a></h1>
 				<p class="skiplink"><a href="#start_here">{L_SKIP}</a></p>
 			</div>
 			
 			<div id="phpbb-navbar" class="phpbb-navbar">
 				<div class="nav-button but-menu"><a id="phpbb-menu-toggle" title="Show menu" href="#">Menu</a></div>
 				
-				<!-- EVENT overall_header_searchbox_before -->
 				<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
 				<div id="searchbox" class="search-box" role="search">
 					<form action="{U_SEARCH}" method="get" id="search">
@@ -140,8 +63,9 @@
 				</div>
 				<!-- ENDIF -->
 				<ul id="phpbb-menu" class="phpbb-menu">
+					<li class="nav-button but-customise"><a href="{U_INDEX}" title="{L_INDEX}">Gesamtforum</a></li>
                     <!-- BEGIN categories -->
-                        <li class="nav-button but-customise"><a href="{categories.URL}">{categories.NAME}</a>
+						<li class="nav-button but-customise"><a href="{categories.URL}">{categories.NAME}</a>
                         <!-- IF categories.forums -->
                             <div class="sub-menu" style="display: none;">
                             <!-- BEGIN categories.forums -->
@@ -155,48 +79,20 @@
                         <!-- ENDIF -->
                         </li>
                     <!-- END categories -->
-					<li class="nav-button but-customise"><a href="#">Funktionen</a>
+					<li class="nav-button but-customise"><a class="" href="#">Clans</a>
 						<div class="sub-menu" style="display: none;">
 							<ul>
-								<li><h4><a href="http://www.strategie-zone.de/forum/faq.php">FAQ</a></h4>
-								<p><a href="http://www.strategie-zone.de/forum/faq.php">Fragen/Antworten Forum</a></p>
+								<li><h4><a class="" href="https://www.strategie-zone.de/forum/viewforum.php?f=390">Die Ketten-ZONIS</a></h4>
+								<p><a class="" href="https://www.strategie-zone.de/forum/viewforum.php?f=390">World of Tanks</a></p>
 								</li>
-								<li><h4><a href="http://www.strategie-zone.de/forum/app.php/medals.php">Medaillen</a></h4>
-								<p><a href="http://www.strategie-zone.de/forum/app.php/medals.php">Communityauszeichnungen</a></p>
-								</li>	
-							</ul>
-							<ul>
-								<li><h4><a href="http://www.strategie-zone.de/forum/viewforum.php?f=263">Tutorials</a></h4>
-								<p><a href="http://www.strategie-zone.de/forum/viewforum.php?f=263">Hilfe bei der Forenbedienung</a></p>
-								</li>		
-								<li><h4><a href="http://www.strategie-zone.de/forum/gallery">Galerie</a></h4>
-								<p><a href="http://www.strategie-zone.de/forum/gallery">Unsere Communitygalerie</a></p>
-								</li>						
-							</ul>
-							<ul>	
-								<li><h4><a href="http://www.strategie-zone.de/forum/page/spenden">Spenden</a></h4>
-								<p><a href="http://www.strategie-zone.de/forum/page/spenden">Hilf der Zone ^^</a></p>
-								</li>						
 							</ul>
 						</div>
 					</li>
 				</ul>
 			</div>
 		</div>
-	
-		<!-- EVENT overall_header_navbar_before -->
 	</div>
-
-	<!-- EVENT overall_header_page_body_before -->
 
 	<a id="start_here" class="anchor"></a>
 	<div id="page-body" role="main">
-		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
-		<div id="information" class="rules">
-			<div class="inner">
-				<strong>{L_INFORMATION}{L_COLON}</strong> {L_BOARD_DISABLED}
-			</div>
-		</div>
-		<!-- ENDIF -->
 
-		<!-- EVENT overall_header_content_before -->

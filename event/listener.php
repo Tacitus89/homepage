@@ -64,6 +64,7 @@ class listener implements EventSubscriberInterface
 
         if($forum_data['forum_type'] == 1)
         {
+			$template_data['S_HP_SPECIAL'] = ($forum_data['hp_special'])? true : false;
             $template_data['HP_POST_ID'] = $forum_data['hp_post_id'];
             $template_data['HP_GALLERY_ID'] = $forum_data['hp_gallery_id'];
             $template_data['HP_GAME_ID'] = $forum_data['hp_game_id'];
@@ -84,20 +85,22 @@ class listener implements EventSubscriberInterface
     {
         $forum_data = $event['forum_data'];
         $forum_data['hp_show'] = $this->request->variable('homepage_show', 0);
-        $forum_data['hp_url'] = $this->request->variable('hp_url', '');
+        $forum_data['hp_url'] = $this->request->variable('hp_url', '', true);
         if($forum_data['forum_type'] == 1)
         {
+			$forum_data['hp_special'] = $this->request->variable('homepage_special', 0);
             $forum_data['hp_post_id'] = $this->request->variable('hp_post_id', 0);
             $forum_data['hp_gallery_id'] = $this->request->variable('hp_gallery_id', 0);
             $forum_data['hp_game_id'] = $this->request->variable('hp_game_id', 0);
         }
         else{
+			$forum_data['hp_special'] = 0;
             $forum_data['hp_post_id'] = 0;
             $forum_data['hp_gallery_id'] = 0;
             $forum_data['hp_game_id'] = 0;
         }
-        $forum_data['hp_desc'] = $this->request->variable('hp_desc', '');
-        $forum_data['hp_meta'] = $this->request->variable('hp_meta', '');
+        $forum_data['hp_desc'] = $this->request->variable('hp_desc', '', true);
+        $forum_data['hp_meta'] = $this->request->variable('hp_meta', '', true);
         $event['forum_data'] = $forum_data;
     }
 }

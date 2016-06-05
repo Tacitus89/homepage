@@ -33,8 +33,17 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
+	'ACTIVE_TOPICS'		=> 'Aktive Themen',
+	'TOPIC_NEWS'		=> 'Themen News',
     'COMMENTS'          => 'Kommentare',
-    'ACTIVE_USERS'      => 'Aktivsten User',
+    'ACTIVE_USERS'      => 'Aktivste User',
+	'NEW_USERS'      	=> 'Neue User',
+	'LINKS'				=> 'Links',
     'GALLERY'           => 'Galerie',
     'GAME_INFO'         => 'Informationen',
+	'GAME_NAME'			=> 'Name',
+	'GAME_DEVELOPER'	=> 'Entwickler',
+	'GAME_PUBLISHER'	=> 'Publisher',
+	'GAME_GENRE'		=> 'Genre',
+	'GAME_RELEASE'		=> 'Release',
 ));

@@ -65,7 +65,7 @@ class install_0_0_1 extends \phpbb\db\migration\migration
 	{
 		return array(
 			'drop_columns'	=> array(
-				$this->table_prefix . 'forums' => array('hp_show', 'hp_special', 'hp_url', 'hp_post_id','hp_meta', 'hp_desc', 'hp_gallery_id', 'hp_game_id'),
+				$this->table_prefix . 'forums' => array('hp_show', 'hp_special', 'hp_name', 'hp_post_id','hp_meta', 'hp_desc', 'hp_gallery_id', 'hp_game_id'),
 			),
 		);
 	}
